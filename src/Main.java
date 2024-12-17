@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,9 +24,7 @@ public class Main {
             }
         }
 
-        if (countMult > 1) {            //если операндов больше 1 выдаем ошибку
-            return "throws Exception";
-        }
+
 
         for (int i = 0; i < str.length(); i++) {            //отделяем числа из строки если текущий символ цифра то
             if (Character.isDigit(str.charAt(i))) {         //добавляем цифру в строку
@@ -38,10 +37,33 @@ public class Main {
             }
         }
 
-        if (countDigit == 1 || countDigit > 2 ||                            //проверки на ограничения
-                a[0] <= 0 || a[0] >= 11 || a[1] <= 0 || a[1] >= 11) {
-            return "throws Exception";
+        if (countMult > 1 || countDigit > 2) {            //если операндов больше 1 или чисел больше 2х выдаем ошибку
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                System.out.println("throws Exception //т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)\n");
+                throw new RuntimeException(e);
+            }
         }
+
+        if (a[0] < 1 || a[0] > 10 || a[1] < 1 || a[1] > 10) {           //проверки на ограничения
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                System.out.println("throws Exception //числа не соответсвуют условиям программы ");
+                throw new RuntimeException(e);
+            }
+        }
+
+        if(countDigit==1){
+            try {
+                throw new Exception();
+            } catch (Exception e) {
+                System.out.println("throws Exception //т.к. строка не является математической операцией");
+                throw new RuntimeException(e);
+            }
+        }
+
 
         for (int i = 0; i < str.length(); i++) {            //операция двух чисел с операндом
             if (!Character.isDigit(str.charAt(i))) {
