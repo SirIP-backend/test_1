@@ -11,25 +11,29 @@ public class Main {
 
     public static String calc(String input) {
         StringBuilder str = new StringBuilder(input);
+        input=input.replaceAll(" ","");
         str.append(" ");                                    //обход для разделения чисел
         int result = 0;
         int countDigit = 0;
         int countMult = 0;
         int[] a = new int[5];
+        String b="";
         StringBuilder str1 = new StringBuilder();
 
         for (int i = 0; i < str.length(); i++) {        //Добавляем счетчик операндов
             if (str.charAt(i) == '+' || str.charAt(i) == '-' || str.charAt(i) == '/' || str.charAt(i) == '*') {
                 countMult++;
+
             }
         }
 
 
 
-        for (int i = 0; i < str.length(); i++) {            //отделяем числа из строки если текущий символ цифра то
+        for (int i = 0; i < str.length()-1; i++) {            //отделяем числа из строки если текущий символ цифра то
             if (Character.isDigit(str.charAt(i))) {         //добавляем цифру в строку
                 str1.append(str.charAt(i));
-            } else {                                                    //иначе если символ не цифра то записываем строку
+            } else {
+                //иначе если символ не цифра то записываем строку
                 a[countDigit] = Integer.parseInt(str1.toString());      //в массив со счетчиком чисел
                 str1 = new StringBuilder();
                 countDigit++;
